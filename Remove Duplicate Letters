@@ -1,0 +1,27 @@
+class Solution 
+{
+    public String removeDuplicateLetters(String s) 
+    {
+        int[] alphabets = new int[26];
+        boolean[] taken = new boolean[26];
+        StringBuilder result = new StringBuilder();
+        result.append(0);
+        for(char c : s.toCharArray())
+		        alphabets[c-'a']++;  
+        for(char c : s.toCharArray())
+        {
+            alphabets[c-'a']--;
+            if(!taken[c-'a'])
+            {
+                while(result.charAt(result.length()-1) > c && alphabets[result.charAt(result.length() - 1) - 'a'] > 0)
+                {
+                    taken[result.charAt(result.length() - 1) - 'a'] = false;
+                    result.deleteCharAt(result.length() - 1);
+                }
+                result.append(c);
+                taken[c-'a'] = true;
+            }
+        }
+        return result.substring(1).toString();
+    }
+}
