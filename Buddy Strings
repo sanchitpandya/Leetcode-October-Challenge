@@ -1,0 +1,35 @@
+class Solution 
+{
+    public boolean buddyStrings(String A, String B) 
+    {
+        if((A.length() == 0 && B.length() == 0) || A.length() != B.length())
+            return false;
+        if(A.length() == 0 || B.length() == 0)
+            return false;
+        
+        StringBuilder firstString = new StringBuilder(A);
+        String C="";
+        
+        boolean[] hash = new boolean[26];
+        for(int i = 0; i < A.length() - 1; i++)
+        {
+            for(int j = i + 1; !hash[firstString.charAt(i) - 'a'] && j < A.length(); j++)
+            {
+                char temp = firstString.charAt(i);
+                firstString.setCharAt(i,firstString.charAt(j));
+                firstString.setCharAt(j, temp);
+                
+                C = firstString.toString();
+                if(C.equals(B))
+                    return true;
+                else
+                {
+                    firstString = new StringBuilder(A);
+                }
+                    
+            }
+            hash[firstString.charAt(i) - 'a'] = true;
+        }
+        return false;
+    }
+}
