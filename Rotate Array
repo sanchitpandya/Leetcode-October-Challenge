@@ -1,0 +1,29 @@
+class Solution 
+{
+    public void rotate(int[] nums, int k) 
+    {
+        rotateArray(nums, 0, k);
+    }
+    
+    private void rotateArray(int[] nums, int start, int k)
+    {
+        if(nums.length == 0 || k == 0)
+            return;
+        
+        k = k % (nums.length - start);
+        
+        for(int i = start, j = nums.length - k; j < nums.length; i++, j++)
+        {
+            swap(nums, i ,j);
+        }
+        
+        rotateArray(nums, start + k, k);
+    }
+    
+    private void swap(int[] nums, int i, int j)
+    {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+}
