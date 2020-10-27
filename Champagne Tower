@@ -1,0 +1,25 @@
+class Solution 
+{
+    public double champagneTower(int poured, int query_row, int query_glass) 
+    {
+        double[][] grid = new double[101][101];
+        
+        grid[0][0] = poured;
+        
+        for (int i = 0; i <= query_row; i++)
+        {
+            for (int j = 0; j <= i; j++) 
+            {
+                double result = (grid[i][j] - 1.0) / 2.0;
+                
+                if (result > 0) 
+                {
+                    grid[i + 1][j] += result;
+                    grid[i + 1][j + 1] += result;
+                }
+            }
+        }
+        
+        return Math.min(1, grid[query_row][query_glass]);    
+    }
+}
