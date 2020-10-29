@@ -1,0 +1,23 @@
+class Solution 
+{
+    public int maxDistToClosest(int[] seats) 
+    {
+        int max = Integer.MIN_VALUE;
+        int start = 0, end = 0;
+        while(end < seats.length)
+        {
+            if(seats[end] == 1)
+            {
+                if(seats[start] == 0)
+                    max = Math.max(max, end - start);
+                else
+                    max = Math.max(max, (end - start) / 2);
+                start = end;
+            }
+            end++;
+        }
+        if(seats[seats.length - 1] == 0)
+            max = Math.max(max, seats.length - start - 1);
+        return max;
+    }
+}
